@@ -144,3 +144,25 @@ This means that you can use the below snippets/code samples how they are, they d
 {{/*CODE STARTS (DON'T TOUCH IF YOU DON'T KNOW WHAT YOU ARE DOING)*/}}
 {{if and (eq .ReactionMessage.ID $ReactionMsg) (not .User.Bot) (eq .Channel.ID $Channel)}} {{$Emoji := .Reaction.Emoji.Name}}{{with .Reaction.Emoji.ID}}{{$Emoji = (joinStr ":" $Emoji .)}}{{end}} {{$dbReactionMsg := dbGet $ReactionMsg "ReactionMsg"}} {{if .ReactionAdded}} {{if $dbReactionMsg}} {{$dbReactionMsg := sdict $dbReactionMsg.Value}}
 ```
+
+
+### Bump notification every 120 minutes
+```ts
+{{/* Trigger type: Hourly interval - Interval 2 Hours - Channel: #bump */}}
+{{ $bumpCooldownMinutes := 120 }}
+{{ $now := currentTime }}
+{{ $guildOwnerUser := userArg .Guild.OwnerID }}
+{{ $reminderMessage := joinStr "" $guildOwnerUser.Mention " it is now time to bump **" .Guild.Name "**!" }}
+
+{{ $globalCategoryID := toInt (dbGet 0 "Global").Value }}
+{{ $lastBumpTime := (dbGet $globalCategoryID "Last Bump").Value }}
+
+{{ if $lastBumpTime }}
+    {{ $minutesSinceBump := toInt ($now.Sub $lastBumpTime).Minutes }}
+    {{ if gt $minutesSinceBump $bumpCooldownMinutes }}
+        {{ sendMessage nil $reminderMessage }}
+    {{ end }}
+{{ else }}
+    {{ sendMessage nil $reminderMessage }}
+{{ end }}
+```
