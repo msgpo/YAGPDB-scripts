@@ -2,7 +2,7 @@
 
 ![Project Picture Custom Commands](https://github.com/CHEF-KOCH/YAGPDB-scripts/blob/master/Screenshots/CustomCommands.png?raw=true)
 
-My own collection of YAGPDB scripts, which I use (_or used_) on my Discord Server. Most of the scripts are currently disabled or I simply do not used them anymore so I decided to open source which hopefully helps others.
+My own collection of YAGPDB scripts, which I use (_or used_) on my Discord Server. Most of the scripts are currently disabled or I simply do not used them anymore so I decided to open source them which hopefully helps others.
 
 
 ### Requirements
@@ -19,7 +19,7 @@ My own collection of YAGPDB scripts, which I use (_or used_) on my Discord Serve
     * [FAQ](#faq)
       * [How do I ban people without avatar who are trying to join my server?](#how-do-i-ban-people-without-avatar-who-are-trying-to-join-my-server)
       * [I use a lot of CCs but I get a strange message that my limit is exceeded, what can I do?](#i-use-a-lot-of-ccs-but-i-get-a-strange-message-that-my-limit-is-exceeded-what-can-i-do)
-      * [Embedlimits](#embedlimits)
+      * [(Discord) YAGPDB Embedlimits](#discord-yagpdb-embedlimits)
       * [Difference between Role IDs?](#difference-between-role-ids)
 
 
@@ -43,10 +43,9 @@ You can use `If not .User.Avatar` in your **User Join** message.
 Some commands need "Pro" Membership. This means you can only create 1 DB per one User on your server unless you unlocked pro. Most DB errors are because you try to execute too many DB commands.
 
 
-#### Embedlimits
+#### (Discord) YAGPDB Embedlimits
 
 All limits are explained over [here](https://discord.com/developers/docs/resources/channel#embed-limits).
-
 
 | Embed property character limits |  |
 | --- | --- |
@@ -65,8 +64,8 @@ You may have up to 25 fields in an embed. A regular bot message can have 1 embed
 | Role Name  | ID          |
 |------------|-------------|
 | Channel (e.g. `#general`) | <#Channel_ID> e.g. `<#722441737720561674>` |
-| User ID `@CK-cool` | <@683274307954147376> |
-| Role_ID `@Hackers` | <@&529673007736553472> |
+| User ID `@CK-cool` | `<@683274307954147376>` |
+| Role_ID `@Hackers` | `<@&529673007736553472>` |
 | Custom Emoji | `<:yagpdb:575061416193556510>` |
 | [Custom Emoji Animated](https://docs.yagpdb.xyz/reference/animated_emotes) | `<a:coolpepe:575061416193556510>`
 
