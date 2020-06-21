@@ -307,3 +307,19 @@ This means that you can use the below snippets/code samples how they are, they d
 {{ end }}
 {{ deleteTrigger 0 }}
 ```
+
+
+### Basic Partnership Reputation as Fast as Possible (for those who bump)
+```ts
+{{/*
+	Trigger Type: Regex
+
+	Trigger: (https?:\/\/)?(www\.)?((discord\.(gg|io|me|li)|discord(app)?\.com\/invite|invite\.gg))(\/|\\)[A-z+0-9]+
+*/}}
+Response: {{execAdmin "grep" .User}}
+{{/*
+	Set the command to Only Run in your Partnerships channel and save it.
+
+	On the Control Panel, go to Fun > Reputation. Enable the module and select Admins and YAGPDB on the option "Allowed roles to give/remove points"
+*/}}
+```
