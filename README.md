@@ -1,5 +1,7 @@
 # YAGPDB scripts
 
+![Project Picture Custom Commands](https://github.com/CHEF-KOCH/YAGPDB-scripts/blob/master/Screenshots/CustomCommands.png?raw=true)
+
 My own collection of YAGPDB scripts, which I use (_or used_) on my Discord Server. Most of the scripts are currently disabled or I simply do not used them anymore so I decided to open source which hopefully helps others.
 
 
@@ -17,6 +19,7 @@ My own collection of YAGPDB scripts, which I use (_or used_) on my Discord Serve
       * [How do I ban people without avatar who are trying to join my server?](#how-do-i-ban-people-without-avatar-who-are-trying-to-join-my-server)
       * [I use a lot of CCs but I get a strange message that my limit is exceeded, what can I do?](#i-use-a-lot-of-ccs-but-i-get-a-strange-message-that-my-limit-is-exceeded-what-can-i-do)
       * [Embedlimits](#embedlimits)
+    * [Difference between Role IDs?](#difference-between-role-ids)
 
 
 ### What you need to change based on your own profile/needs
@@ -56,3 +59,10 @@ All limits are explained over [here](https://discord.com/developers/docs/resourc
 | footer      | 2048 |
 
 You may have up to 25 fields in an embed. A regular bot message can have 1 embed, webhooks up to 10. The sum of all characters in an embed structure must not exceed **6000 characters**.
+
+
+### Difference between Role IDs?
+
+ Roles      | `-listroles`      |
+|------------|-------------|
+| <img src="https://github.com/CHEF-KOCH/YAGPDB-scripts/blob/master/Screenshots/Role IDs%explained?raw=true" width="250"> | <img src="https://github.com/CHEF-KOCH/YAGPDB-scripts/blob/master/Screenshots/listroles?raw=true" width="250"> |
