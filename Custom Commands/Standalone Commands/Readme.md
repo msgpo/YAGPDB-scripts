@@ -206,3 +206,27 @@ This means that you can use the below snippets/code samples how they are, they d
 
 {{ sendMessage nil (cembed $embed) }}
 ```
+
+
+### Giphy Search
+```ts
+{{/*
+    Usage: `giphy`.
+    Recommended trigger: Command (Mention/cmd prefix).
+*/}}
+{{$base_url := "https://giphy.com/search/"}}
+{{$query := urlescape .StrippedMsg}}
+{{$id := sendMessageRetID nil (print $base_url $query)}}
+{{sleep 3}}
+{{$Message := getMessage nil $id}}{{$del := false}}
+{{with $Message.Embeds}}
+    {{with (index . 0).Thumbnail}}
+        {{if .Width}}{{editMessage nil  $id (complexMessageEdit "content" "" "embed" (sdict "description" "**Giphy Search Result**" "image" (sdict "url" .ProxyURL)))}}
+        {{else}}{{$del := true}}
+        {{end}}
+    {{else}}{{$del := true}}
+    {{end}}
+{{else}}{{$del := true}}
+{{end}}
+{{if $del}}{{deleteMessage nil $id}}{{end}}
+```
