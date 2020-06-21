@@ -1,6 +1,7 @@
 # YAGPDB scripts
 
-My own collection of YAGPDB scripts, which I use on my Discord Server. Most of the scripts are disabled or not used anymore, I decided to open source them so others can benefit from it.
+My own collection of YAGPDB scripts, which I use (_or used_) on my Discord Server. Most of the scripts are currently disabled or I simply do not used them anymore so I decided to open source which hopefully helps others.
+
 
 ### Requirements
 * [Discord](https://discord.com/)
