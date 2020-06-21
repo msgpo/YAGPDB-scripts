@@ -328,11 +328,32 @@ Response: {{execAdmin "grep" .User}}
 ### Rename your channel automatically (Current time example)
 
 **Info**
+
 Discord only allows to change the channel name once every 10 minutes.
 
 ```ts
+{{/*
+	Minute Interval
+
+	Interval: 10
+
+    Channel: Choose your channel which you like to rename.
+*/}}
 {{$clocks := sdict "1" "ServerTime" "2" "ServerTime" "3" "ServerTime" "4" "ServerTime" "5" "ServerTime" "6" "ServerTime" "7" "ServerTime" "8" "ServerTime" "9" "ServerTime" "10" "ServerTime" "11" "ServerTime" "12" "ServerTime"}}
 {{$time := (currentTime.In (newDate 0 0 0 0 0 0 "Europe/Berlin").Location)}}
 {{$name := (joinStr "" " " ($clocks.Get (str ($time.Format "3"))) " " ($time.Format "3:04 PM") "" ($time.Format "") "")}}
 {{editChannelName 719728567054893146 $name}}
+```
+
+
+### Simple membercount & online member counter
+
+```ts
+{{/* Replace xxxxx with channel IDs, use voice channels for best results. This basically replaces typical "Stats Bods". */}}
+{{editChannelName "xxxxx" (joinStr "" "Members: " .Guild.MemberCount)}}
+{{editChannelName "xxxxx" (joinStr "" "Online: " onlineCount)}}
+{{/* Basic clock (UTC) in voice channel form  */}}
+{{editChannelName "xxxxx" (joinStr "" (currentTime.Format "3:04PM") " - " (currentTime.Format "15:04") " UTC")}}
+{{/* Basic clock (none UTC Variant), make sure you change the offset (-4) and  EDT. */}}
+{{editChannelName "xxxxx" (joinStr "" ((currentTime.Add (toDuration (mult -4 .TimeHour))).Format "3:04PM") " - " ((currentTime.Add (toDuration (mult -4 .TimeHour))).Format "15:04") " EDT")}}
 ```
