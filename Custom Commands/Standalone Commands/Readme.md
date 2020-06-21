@@ -323,3 +323,16 @@ Response: {{execAdmin "grep" .User}}
 	On the Control Panel, go to Fun > Reputation. Enable the module and select Admins and YAGPDB on the option "Allowed roles to give/remove points"
 */}}
 ```
+
+
+### Rename your channel automatically (Current time example)
+
+**Info**
+Discord only allows to change the channel name once every 10 minutes.
+
+```ts
+{{$clocks := sdict "1" "ServerTime" "2" "ServerTime" "3" "ServerTime" "4" "ServerTime" "5" "ServerTime" "6" "ServerTime" "7" "ServerTime" "8" "ServerTime" "9" "ServerTime" "10" "ServerTime" "11" "ServerTime" "12" "ServerTime"}}
+{{$time := (currentTime.In (newDate 0 0 0 0 0 0 "Europe/Berlin").Location)}}
+{{$name := (joinStr "" " " ($clocks.Get (str ($time.Format "3"))) " " ($time.Format "3:04 PM") "" ($time.Format "") "")}}
+{{editChannelName 719728567054893146 $name}}
+```

@@ -16,7 +16,7 @@ My own collection of YAGPDB scripts, which I use (_or used_) on my Discord Serve
     * [Requirements](#requirements)
   * [Table of Contents](#table-of-contents)
     * [What you need to change based on your own profile/needs](#what-you-need-to-change-based-on-your-own-profileneeds)
-    * [FAQ](#faq)
+  * [FAQ](#faq)
       * [How do I ban people without avatar who are trying to join my server?](#how-do-i-ban-people-without-avatar-who-are-trying-to-join-my-server)
       * [I use a lot of CCs but I get a strange message that my limit is exceeded, what can I do?](#i-use-a-lot-of-ccs-but-i-get-a-strange-message-that-my-limit-is-exceeded-what-can-i-do)
       * [(Discord) YAGPDB Embedlimits](#discord-yagpdb-embedlimits)
@@ -31,7 +31,7 @@ My own collection of YAGPDB scripts, which I use (_or used_) on my Discord Serve
 * You can choose to copy the comments `{{/*This is a comment*/}}` or not, I see no problem to keep them in the CC (unless you hit the character limit).
 
 
-### FAQ
+## FAQ
 
 #### How do I ban people without avatar who are trying to join my server?
 
