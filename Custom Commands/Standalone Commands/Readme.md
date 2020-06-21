@@ -337,7 +337,7 @@ Discord only allows to change the channel name once every 10 minutes.
 
 	Interval: 10
 
-    Channel: Choose your channel which you like to rename.
+	Channel: Choose your channel which you like to rename.
 */}}
 {{$clocks := sdict "1" "ServerTime" "2" "ServerTime" "3" "ServerTime" "4" "ServerTime" "5" "ServerTime" "6" "ServerTime" "7" "ServerTime" "8" "ServerTime" "9" "ServerTime" "10" "ServerTime" "11" "ServerTime" "12" "ServerTime"}}
 {{$time := (currentTime.In (newDate 0 0 0 0 0 0 "Europe/Berlin").Location)}}
@@ -356,4 +356,33 @@ Discord only allows to change the channel name once every 10 minutes.
 {{editChannelName "xxxxx" (joinStr "" (currentTime.Format "3:04PM") " - " (currentTime.Format "15:04") " UTC")}}
 {{/* Basic clock (none UTC Variant), make sure you change the offset (-4) and  EDT. */}}
 {{editChannelName "xxxxx" (joinStr "" ((currentTime.Add (toDuration (mult -4 .TimeHour))).Format "3:04PM") " - " ((currentTime.Add (toDuration (mult -4 .TimeHour))).Format "15:04") " EDT")}}
+```
+
+
+### Message link preview
+ ````ts
+{{/* This will show a preview of message links posted, use https://discordapp.com/channels\/(\d+)\/(\d+)\/(\d+) as the regex trigger */}}
+{{ $matches := reFindAllSubmatches `https://discordapp.com/channels\/(\d+)\/(\d+)\/(\d+)` .Message.Content }}
+{{$msg := getMessage (index (index $matches 0) 2) (index (index $matches 0) 3) }}
+{{if not $msg}}
+
+{{else}}
+{{ $avatar := (joinStr "" "https://cdn.discordapp.com/avatars/" (toString $msg.Author.ID) "/" $msg.Author ".png") }}
+
+{{$embedRaw := sdict
+"description" (joinStr "" "**[Message Link](" (index (index $matches 0) 0) ")  to <#" $msg.ChannelID ">**\n" $msg.Content)
+"color" 4645612
+"author" (sdict "name"  $msg.Author.Username "icon_url" ($msg.Author.AvatarURL "64"))
+"footer" (sdict "text" (joinStr "" "Req. by "  .Message.Author.Username ". Quote from "))
+"timestamp" $msg.Timestamp  }}
+
+{{if $msg.Attachments}}
+{{$embedRaw.Set "image" (sdict "url" (index $msg.Attachments 0).URL) }}
+{{end}}
+
+{{ sendMessage nil (cembed $embedRaw) }}
+
+{{/* Delete the trigger if it only contained a link and nothing more */}}
+{{if eq (len (index (index $matches 0) 0)) (len .Message.Content) }} {{deleteTrigger 1}} {{end}}
+{{end}}
 ```
