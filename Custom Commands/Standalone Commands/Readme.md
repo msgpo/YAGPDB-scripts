@@ -3,6 +3,36 @@
 This means that you can use the below snippets/code samples how they are, they do not relay on something else. For more complex CustomCommands (CCs) check the GitHub folders.
 
 
+### Basic Verification System
+```ts
+{{/* Welcome Reaction Verification */}}
+{{ $msg := toInt (dbGet 0 "welcomeEmbed").Value }}
+{{if not (hasRoleID 720787229773004850)}}
+{{if eq .Reaction.Emoji.Name "✅"}}
+{{$day := currentTime.Day}}{{$second := mod $day 10}}{{if in (cslice 11 12 13) $day}}{{$day = print $day "th"}}{{else}}{{if eq $second 1}}{{$day = print $day "st"}}{{else if eq $second 2}}{{$day = print $day "nd"}}{{else if eq $second 3}}{{$day = print $day "rd"}}{{else}}{{$day = print $day "th"}}{{end}}{{end}}
+{{$date := print (currentTime.Format "Monday") " " $day " " (currentTime.Format "January 2006, 3:04PM")}}
+{{addRoleID 720790092750258186}} {{/* The role you want to give once approved */}}
+{{ $userID := .User.ID }}
+{{ $avatar := (joinStr "" "https://cdn.discordapp.com/avatars/" (toString .User.ID) "/" .User.Avatar ".png") }}
+{{ $embed := cembed
+"title" (joinStr "" "User: " .User.Username " has verified them self.")
+"thumbnail" (sdict "url" $avatar)
+"description" (joinStr "" "Verified on: " $date)
+"color" 60928}}
+{{sendMessage 720788455617069076 $embed}}
+{{$emoji := .Reaction.Emoji.Name}}{{with .Reaction.Emoji.ID}}{{$emoji = (joinStr ":" $emoji .)}}{{end}}
+{{deleteMessageReaction .Reaction.ChannelID .ReactionMessage.ID .Reaction.UserID $emoji}}
+{{else}}
+{{$emoji := .Reaction.Emoji.Name}}{{with .Reaction.Emoji.ID}}{{$emoji = (joinStr ":" $emoji .)}}{{end}}
+{{deleteMessageReaction .Reaction.ChannelID .ReactionMessage.ID .Reaction.UserID $emoji}}
+{{end}}
+{{else}}
+{{$emoji := .Reaction.Emoji.Name}}{{with .Reaction.Emoji.ID}}{{$emoji = (joinStr ":" $emoji .)}}{{end}}
+{{deleteMessageReaction .Reaction.ChannelID .ReactionMessage.ID .Reaction.UserID $emoji}}
+{{end}}
+```
+
+
 ### Twitch Stream Announcement if you start streaming
 ```ts
 {{ $avatar := (joinStr "" "https://cdn.discordapp.com/avatars/" (toString .User.ID) "/" .User.Avatar ".png") }}
