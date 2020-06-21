@@ -65,4 +65,5 @@ You may have up to 25 fields in an embed. A regular bot message can have 1 embed
 
  Roles      | `-listroles`      |
 |------------|-------------|
-| <img src="https://github.com/CHEF-KOCH/YAGPDB-scripts/blob/master/Screenshots/Role IDs%explained?raw=true" width="250"> | <img src="https://github.com/CHEF-KOCH/YAGPDB-scripts/blob/master/Screenshots/listroles?raw=true" width="250"> |
+| <img src="https://github.com/CHEF-KOCH/YAGPDB-scripts/blob/master/Screenshots/Role%20IDs%20explained.png?raw=true" width="250"> | <img src="https://github.com/CHEF-KOCH/YAGPDB-scripts/blob/master/Screenshots/listroles.png?raw=true" width="250"> |
+
