@@ -2,10 +2,25 @@
 
 This means that you can use the below snippets/code samples how they are, they do not relay on something else. For more complex CustomCommands (CCs) check the GitHub folders.
 
+`Ungrouped` means you can put the commands wherever you like.
+
+
+### Channel Help (_delete after 60 seconds_)
+
+```ts
+{{ /* Command: autohelp - Case sensitive trigger: false - Group: Channel Help */ }}
+{{$msg := cembed "color" 9021952 "title" "Quick Channel Help Topics:" "author" (sdict "name" "Make sure you have DMs enabled or this wont work") "footer" (sdict "text" "React to this message to receive help on that topic.") "description" ":one: What are the Rules? \n:two: What is SAR? \n:three: Message / Channel / User IDs \n:four: How I use encryption? \n:five: How to use DiscordCrypt? \n:six: What are RRS-Feeds? \n:seven: I cannot get another role! \n:eight: I cannot see or write in help channels \n:nine: Why are accounts without avatar forbidden?"}}
+
+{{$msg = sendMessageRetID nil $msg}}
+{{if dbGet .User.ID "cld_autohelp"}}{{deleteMessage nil $msg 60}}{{end}}{{dbSetExpire .User.ID "cld_autohelp" "" 60}}
+{{addMessageReactions nil $msg "1️⃣" "2️⃣" "3️⃣" "4️⃣" "5️⃣" "6️⃣" "7️⃣" "8️⃣" "9️⃣"}}
+```
+
 
 ### Basic Verification System
+
 ```ts
-{{/* Welcome Reaction Verification */}}
+{{ /* Basic welcome Reaction Verification */ }}
 {{ $msg := toInt (dbGet 0 "welcomeEmbed").Value }}
 {{if not (hasRoleID 720787229773004850)}}
 {{if eq .Reaction.Emoji.Name "✅"}}
@@ -19,7 +34,7 @@ This means that you can use the below snippets/code samples how they are, they d
 "thumbnail" (sdict "url" $avatar)
 "description" (joinStr "" "Verified on: " $date)
 "color" 60928}}
-{{sendMessage 720788455617069076 $embed}}
+{{sendMessage 720788455617069076 $embed}} {{/* The message role you want to give once approved */}}
 {{$emoji := .Reaction.Emoji.Name}}{{with .Reaction.Emoji.ID}}{{$emoji = (joinStr ":" $emoji .)}}{{end}}
 {{deleteMessageReaction .Reaction.ChannelID .ReactionMessage.ID .Reaction.UserID $emoji}}
 {{else}}
@@ -202,6 +217,7 @@ This means that you can use the below snippets/code samples how they are, they d
 ```ts
 {{/*
     Usage: `-worldclock`.
+
     Recommended trigger: Command trigger with trigger `worldclock`.
 */}}
 
@@ -242,6 +258,7 @@ This means that you can use the below snippets/code samples how they are, they d
 ```ts
 {{/*
     Usage: `giphy`.
+
     Recommended trigger: Command (Mention/cmd prefix).
 */}}
 {{$base_url := "https://giphy.com/search/"}}
@@ -402,4 +419,14 @@ Discord only allows to change the channel name once every 10 minutes.
 "footer" (sdict "text" (joinStr " " "Requested by:" (.User.Username))) }}
 
 {{ sendMessage nil $qEmbed }}
+```
+
+
+### Ban
+
+```ts
+{{/* StartsWith: \-ban - Case sensitive trigger: false - Group: Ungrouped */}}
+{{if .Message.Mentions}}
+:hammer: Banned `{{index .Message.Mentions 0}}` forever biatch!
+{{end}}
 ```
