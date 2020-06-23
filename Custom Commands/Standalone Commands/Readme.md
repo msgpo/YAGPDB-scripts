@@ -8,7 +8,8 @@ This means that you can use the below snippets/code samples how they are, they d
 ### Channel Help (_delete after 60 seconds_)
 
 ```ts
-{{ /* Command: autohelp - Case sensitive trigger: false - Group: Channel Help */ }}
+{{/* Command: autohelp - Case sensitive trigger: false - Group: Channel Help */}}
+{{/* Ensure your DB contains the answers */}}
 {{$msg := cembed "color" 9021952 "title" "Quick Channel Help Topics:" "author" (sdict "name" "Make sure you have DMs enabled or this wont work") "footer" (sdict "text" "React to this message to receive help on that topic.") "description" ":one: What are the Rules? \n:two: What is SAR? \n:three: Message / Channel / User IDs \n:four: How I use encryption? \n:five: How to use DiscordCrypt? \n:six: What are RRS-Feeds? \n:seven: I cannot get another role! \n:eight: I cannot see or write in help channels \n:nine: Why are accounts without avatar forbidden?"}}
 
 {{$msg = sendMessageRetID nil $msg}}
@@ -17,10 +18,19 @@ This means that you can use the below snippets/code samples how they are, they d
 ```
 
 
+### Response automatically with picture/gif to exact message
+
+```ts
+{{/* Exact Match: dang - Case sensitive trigger: false - Group: Ungrouped */}}
+{{ $embed := cembed "image" (sdict "url" "https://media.giphy.com/media/YJDmc88k7ttao/giphy.gif")  }}
+{{  sendMessage nil $embed }}
+```
+
+
 ### Basic Verification System
 
 ```ts
-{{ /* Basic welcome Reaction Verification */ }}
+{{/* Basic welcome Reaction Verification */}}
 {{ $msg := toInt (dbGet 0 "welcomeEmbed").Value }}
 {{if not (hasRoleID 720787229773004850)}}
 {{if eq .Reaction.Emoji.Name "✅"}}
