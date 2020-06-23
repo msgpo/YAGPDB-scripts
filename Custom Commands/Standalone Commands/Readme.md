@@ -360,7 +360,8 @@ Discord only allows to change the channel name once every 10 minutes.
 
 
 ### Message link preview
- ````ts
+
+ ```ts
 {{/* This will show a preview of message links posted, use https://discordapp.com/channels\/(\d+)\/(\d+)\/(\d+) as the regex trigger */}}
 {{ $matches := reFindAllSubmatches `https://discordapp.com/channels\/(\d+)\/(\d+)\/(\d+)` .Message.Content }}
 {{$msg := getMessage (index (index $matches 0) 2) (index (index $matches 0) 3) }}
@@ -385,4 +386,20 @@ Discord only allows to change the channel name once every 10 minutes.
 {{/* Delete the trigger if it only contained a link and nothing more */}}
 {{if eq (len (index (index $matches 0) 0)) (len .Message.Content) }} {{deleteTrigger 1}} {{end}}
 {{end}}
+```
+
+
+### Quiz
+
+```ts
+{{/* Case sensitive trigger: false - Group: Ungrouped */}}
+{{ $qEmbed := cembed
+
+"title" "Quiz"
+{{/* Link to quit question Google Sheet/Docs */}}
+"description" "If you want to take the quiz, click [here](https://docs.google.com/forms/d/e/)!"
+"color" 32768
+"footer" (sdict "text" (joinStr " " "Requested by:" (.User.Username))) }}
+
+{{ sendMessage nil $qEmbed }}
 ```
