@@ -23,7 +23,7 @@ This means that you can use the below snippets/code samples how they are, they d
 ```ts
 {{/* Exact Match: dang - Case sensitive trigger: false - Group: Ungrouped */}}
 {{ $embed := cembed "image" (sdict "url" "https://media.giphy.com/media/YJDmc88k7ttao/giphy.gif")  }}
-{{  sendMessage nil $embed }}
+{{ sendMessage nil $embed }}
 ```
 
 
