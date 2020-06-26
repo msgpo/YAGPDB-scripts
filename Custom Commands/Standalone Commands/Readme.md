@@ -468,3 +468,23 @@ Discord only allows to change the channel name once every 10 minutes.
 Unknown user :(
 {{end}}
 ```
+
+
+### Encryption Help
+
+```ts
+{{/*
+    Regex: .*
+
+    Case sensitive trigger: false
+
+	Group: Encryption */}}
+{{deleteMessage 214439334089195521 ((dbGet 0 "bug").Value) 1}}{{sleep 1}}
+{{$a := sendMessageRetID nil "
+diff\nHow do I use this channel?\n\nYou choose the help role and approve (react) to the emote which confirms that you have read this message.
+\n
+
+fix\nRequesting help:\nTitle, Issue\nDescription, Context\nSteps to reproduce\nAdditional info (screenshot if applicable).
+
+**Due to people using this channel incorrectly, ALL user are required to react to be able to use the channel (you need to have the help role and be in the server for at least 1h prior).\n__IMPROPER USE OF THIS CHANNEL WILL RESULT IN PUNISHMENT!__**"}}{{dbSet 0 "bug" (toString $a)}} {{addMessageReactions nil $a ":upvote:524907425531428864"}}
+```
