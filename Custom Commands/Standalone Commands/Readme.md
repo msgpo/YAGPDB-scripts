@@ -435,8 +435,36 @@ Discord only allows to change the channel name once every 10 minutes.
 ### Ban
 
 ```ts
-{{/* StartsWith: \-ban - Case sensitive trigger: false - Group: Ungrouped */}}
+{{/*
+    StartsWith: \-ban
+
+    Case sensitive trigger: false
+
+	Group: Ungrouped */}}
 {{if .Message.Mentions}}
 :hammer: Banned `{{index .Message.Mentions 0}}` forever biatch!
+{{end}}
+```
+
+
+### List your own Avatar in big
+
+```ts
+{{/*
+    Command: avatar
+
+    Case sensitive trigger: false
+
+	Group: Ungrouped */}}
+{{$user := .User}}
+
+{{if gt (len .CmdArgs) 0}}
+    {{$user = userArg (index .CmdArgs 0)}}
+{{end}}
+
+{{if $user}}
+   {{$user.AvatarURL "512"}}
+{{else}}
+Unknown user :(
 {{end}}
 ```
